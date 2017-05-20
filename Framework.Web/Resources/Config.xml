@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 应用全局配置 -->
+<!-- Apply global configuration -->
+<root>
+
+  <item name="site.page.tag" type="string" desc="页头后缀">page tag</item>
+  <item name="site.page.keywords" type="string" desc="页头关键字">page keys</item>
+  <item name="site.page.author" type="string" desc="页头作者">page head author</item>
+  <item name="site.page.description" type="string" desc="页头描述">page head description</item>
+  <item name="site.page.icp" type="string" desc="页脚备案">X ICP - XXX</item>
+
+  <item name="company.name" type="string" desc="公司名称">company name</item>
+  <item name="company.telphone" type="string" desc="公司电话">0000-00000000</item>
+  <item name="company.address" type="string" desc="公司地址">company address</item>
+  <item name="company.mailcode" type="string" desc="公司邮编">000000</item>
+  <item name="company.fax" type="string" desc="公司传真">0000-00000000</item>
+  <item name="company.email" type="string" desc="公司邮箱">company@company.com</item>
+
+  <item name="member.user.defaultface" type="string" desc="用户默认头像">face.jpg</item>
+
+</root>
