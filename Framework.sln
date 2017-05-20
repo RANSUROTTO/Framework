@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Core.Tests", "Fra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.AutoCode", "Framework.AutoCode\Framework.AutoCode.csproj", "{1B4B6C6B-6384-4248-B432-B76B43970F28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Tests.Console", "Framework.Tests.Console\Framework.Tests.Console.csproj", "{BBEBDED7-8235-467A-8071-7FFDF69133D5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,10 +71,6 @@ Global
 		{1B4B6C6B-6384-4248-B432-B76B43970F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B4B6C6B-6384-4248-B432-B76B43970F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B4B6C6B-6384-4248-B432-B76B43970F28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBEBDED7-8235-467A-8071-7FFDF69133D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBEBDED7-8235-467A-8071-7FFDF69133D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBEBDED7-8235-467A-8071-7FFDF69133D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBEBDED7-8235-467A-8071-7FFDF69133D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +85,5 @@ Global
 		{5787FA76-E05B-4788-B6B0-92D9CA9D86D5} = {28DA5B73-7977-4979-BD96-D577F5A46AAB}
 		{1DECBB1F-B516-43BD-8A06-FDBF3FE4DBC2} = {436055D1-4E0F-41D8-BD25-DC530C1E56D7}
 		{1B4B6C6B-6384-4248-B432-B76B43970F28} = {DF2917C7-2212-408F-A3BF-375A4C15B687}
-		{BBEBDED7-8235-467A-8071-7FFDF69133D5} = {436055D1-4E0F-41D8-BD25-DC530C1E56D7}
 	EndGlobalSection
 EndGlobal
