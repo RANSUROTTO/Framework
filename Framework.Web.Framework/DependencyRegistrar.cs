@@ -26,7 +26,7 @@ namespace Framework.Web.Framework
         {
             //注册Http上下文及其相关内容
             builder.Register(c =>
-                //当HttpContext不可用时，注册FakeHttpContext => 单元测试模拟Web允许环境
+                //当HttpContext不可用时，注册FakeHttpContext => 允许单元测试模拟Web环境
                 HttpContext.Current != null ?
                 (new HttpContextWrapper(HttpContext.Current) as HttpContextBase) :
                 (new FakeHttpContext("~/") as HttpContextBase))
@@ -50,7 +50,8 @@ namespace Framework.Web.Framework
 
             //注册数据层
             var dataSettingsManager = new DataSettingsManager();
-            var dataProviderSettings = dataSettingsManager.LoadSettings(); //从配置文件中读取数据配置
+            //从配置文件中读取数据配置
+            var dataProviderSettings = dataSettingsManager.LoadSettings(); 
             builder.Register(c => dataSettingsManager.LoadSettings()).As<DataSettings>();
             //默认提供 EF数据库管理 填充 BaseDataProviderManager  //更换orm可修改
             builder.Register(x => new EfDataProviderManager(x.Resolve<DataSettings>())).As<BaseDataProviderManager>().InstancePerDependency();

@@ -93,7 +93,9 @@
     <Compile Include="Data\DataSettings.cs" />
     <Compile Include="Data\DataSettingsHelper.cs" />
     <Compile Include="Data\DataSettingsManager.cs" />
+    <Compile Include="Data\Providers\EfDataProviderManager.cs" />
     <Compile Include="Data\Providers\IDataProvider.cs" />
+    <Compile Include="Data\Providers\SqlServerDataProvider.cs" />
     <Compile Include="Fakes\FakeHttpContext.cs" />
     <Compile Include="Fakes\FakeHttpRequest.cs" />
     <Compile Include="Fakes\FakeHttpResponse.cs" />

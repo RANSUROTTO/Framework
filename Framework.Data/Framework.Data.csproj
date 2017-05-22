@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EfDataProviderManager.cs" />
     <Compile Include="Context\FrameDbContext.cs" />
     <Compile Include="Domain\BaseEntity.cs" />
     <Compile Include="Context\IDbContext.cs" />
