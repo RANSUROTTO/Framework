@@ -1,6 +1,8 @@
 ﻿using System;
+using Framework.Core.Data;
+using Framework.Core.Data.Providers;
 
-namespace Framework.Core.Data.Providers
+namespace Framework.Data.Providers
 {
     public class EfDataProviderManager : BaseDataProviderManager
     {
@@ -19,7 +21,7 @@ namespace Framework.Core.Data.Providers
             switch (providerName.ToLowerInvariant())
             {
                 case "sqlserver":
-                //return new SqlServerDataProvider();
+                    return new SqlServerDataProvider();
                 case "sqlce":
                 //return new SqlCeDataProvider();
                 default:

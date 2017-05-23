@@ -16,6 +16,7 @@ using Framework.Core.Fakes;
 using Framework.Core.Infrastructure.DependencyManagement;
 using Framework.Core.Infrastructure.TypeFinder;
 using Framework.Data;
+using Framework.Data.Providers;
 using Framework.Data.Repository;
 
 namespace Framework.Web.Framework
