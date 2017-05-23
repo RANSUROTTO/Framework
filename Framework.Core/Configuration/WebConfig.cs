@@ -20,12 +20,24 @@ namespace Framework.Core.Configuration
         {
             var config = new WebConfig();
 
-            var startupNode = section.SelectSingleNode("Startup");
+            var startupNode = section.SelectSingleNode("IgnoreStartupTasks");
             if (startupNode?.Attributes != null)
             {
-                var attribute = startupNode.Attributes["IgnoreStartupTasks"];
+                var attribute = startupNode.Attributes["Enabled"];
                 if (attribute != null)
                     config.IgnoreStartupTasks = Convert.ToBoolean(attribute.Value);
+            }
+
+            var redisNode = section.SelectSingleNode("RedisCaching");
+            if (redisNode?.Attributes != null)
+            {
+                var redisEnabled = redisNode.Attributes["Enabled"];
+                if (redisEnabled != null)
+                    config.RedisCachingEnabled = Convert.ToBoolean(redisEnabled.Value);
+
+                var redisConnection = redisNode.Attributes["ConnectionString"];
+                if (redisConnection != null)
+                    config.RedisCachingEnabled = Convert.ToBoolean(redisConnection.Value);
             }
 
             return config;
@@ -60,6 +72,16 @@ namespace Framework.Core.Configuration
         /// 是否运行应用程序启动任务
         /// </summary>
         public bool IgnoreStartupTasks { get; set; }
+
+        /// <summary>
+        /// 指示是否应该使用Redis服务器进行缓存（而不是默认的内存中缓存）
+        /// </summary>
+        public bool RedisCachingEnabled { get; private set; }
+
+        /// <summary>
+        /// Redis连接字符串。 在启用Redis缓存时使用
+        /// </summary>
+        public string RedisCachingConnectionString { get; private set; }
 
         #endregion
 

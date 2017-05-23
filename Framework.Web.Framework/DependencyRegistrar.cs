@@ -16,6 +16,7 @@ using Framework.Core.Fakes;
 using Framework.Core.Infrastructure.DependencyManagement;
 using Framework.Core.Infrastructure.TypeFinder;
 using Framework.Data;
+using Framework.Data.Context;
 using Framework.Data.Providers;
 using Framework.Data.Repository;
 
@@ -52,7 +53,7 @@ namespace Framework.Web.Framework
             //注册数据层
             var dataSettingsManager = new DataSettingsManager();
             //从配置文件中读取数据配置
-            var dataProviderSettings = dataSettingsManager.LoadSettings(); 
+            var dataProviderSettings = dataSettingsManager.LoadSettings();
             builder.Register(c => dataSettingsManager.LoadSettings()).As<DataSettings>();
             //默认提供 EF数据库管理 填充 BaseDataProviderManager  //更换orm可修改
             builder.Register(x => new EfDataProviderManager(x.Resolve<DataSettings>())).As<BaseDataProviderManager>().InstancePerDependency();
@@ -65,12 +66,12 @@ namespace Framework.Web.Framework
                 dataProvider.InitConnectionFactory();
 
                 //注册数据库上下文
-                //builder.Register<IDbContext>(c => new FrameDbContext(dataProviderSettings.DataConnectionString)).InstancePerLifetimeScope();
+                builder.Register<IDbContext>(c => new EntityContext(dataProviderSettings.DataConnectionString)).InstancePerLifetimeScope();
             }
             else
             {
                 //直接注册数据库上下文
-                //builder.Register<IDbContext>(c => new FrameDbContext(dataSettingsManager.LoadSettings().DataConnectionString)).InstancePerLifetimeScope();
+                builder.Register<IDbContext>(c => new EntityContext(dataSettingsManager.LoadSettings().DataConnectionString)).InstancePerLifetimeScope();
             }
 
             //表操作封装实现
@@ -78,7 +79,7 @@ namespace Framework.Web.Framework
 
             //注册缓存管理
 
-            if (false) //全局缓存 如果有使用Redis则不使用内置的MemoryCache.
+            if (config.RedisCachingEnabled) //全局缓存 如果有使用Redis则不使用内置的MemoryCache.
             {
                 //注册Reids缓存服务
 
