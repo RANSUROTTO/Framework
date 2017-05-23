@@ -16,10 +16,10 @@ namespace Framework.Admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", area = "Admin", id = "" },
-                new[] { "Framework.Admin.Controllers" }
+                name: "Admin_default",
+                url: "Admin/{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", area = "Admin", id = UrlParameter.Optional },
+                namespaces: new[] { "Framework.Admin.Controllers" }
             );
 
         }

@@ -20,24 +20,25 @@ namespace Framework.Core.Configuration
         {
             var config = new WebConfig();
 
+            //StartUp
             var startupNode = section.SelectSingleNode("IgnoreStartupTasks");
             if (startupNode?.Attributes != null)
             {
-                var attribute = startupNode.Attributes["Enabled"];
-                if (attribute != null)
-                    config.IgnoreStartupTasks = Convert.ToBoolean(attribute.Value);
+                var attribute = GetBool(startupNode, "Enabled");
+                config.IgnoreStartupTasks = attribute;
             }
 
+            //Redis
             var redisNode = section.SelectSingleNode("RedisCaching");
             if (redisNode?.Attributes != null)
             {
-                var redisEnabled = redisNode.Attributes["Enabled"];
-                if (redisEnabled != null)
-                    config.RedisCachingEnabled = Convert.ToBoolean(redisEnabled.Value);
-
-                var redisConnection = redisNode.Attributes["ConnectionString"];
+                //Reids Enabled
+                var redisEnabled = GetBool(startupNode, "Enabled");
+                config.RedisCachingEnabled = redisEnabled;
+                //Redis Connection String
+                var redisConnection = GetString(startupNode, "ConnectionString");
                 if (redisConnection != null)
-                    config.RedisCachingEnabled = Convert.ToBoolean(redisConnection.Value);
+                    config.RedisCachingConnectionString = redisConnection;
             }
 
             return config;

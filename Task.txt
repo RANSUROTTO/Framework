@@ -1,0 +1,11 @@
+1.搭建整体架构   √
+2.IOC容器及依赖注入部分  √
+3.数据库操作(目前仅有EntityFramework=>SqlServer,Mysql)  √
+4.Cache (目前差Redis未处理)
+5.目前正在处理Area
+
+
+
+
+目前可读配置:
+WebConfig,db.config,config.xml
