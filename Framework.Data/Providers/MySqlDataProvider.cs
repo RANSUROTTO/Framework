@@ -6,7 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Framework.Core.Data.Initializers;
 using Framework.Core.Data.Providers;
+using Framework.Data.Context;
 using MySql.Data.Entity;
 
 namespace Framework.Data.Providers
@@ -24,16 +26,25 @@ namespace Framework.Data.Providers
 
         public void InitConnectionFactory()
         {
-            var connectionFactory = string.IsNullOrEmpty(_connString) ? new MySqlConnectionFactory() : new MySqlConnectionFactory(_connString);
 
-            //TODO fix compilation warning (below)
+            var connectionFactory = new MySqlConnectionFactory();
+            if (!string.IsNullOrEmpty(_connString))
+                connectionFactory.CreateConnection(_connString);
 #pragma warning disable 0618
             Database.DefaultConnectionFactory = connectionFactory;
         }
 
         public void SetDatabaseInitializer()
         {
-            throw new NotImplementedException();
+            string[] tablesToValidate = { };
+            var customCommands = new List<string>();
+            //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
+            //customCommands.AddRange(ParseCommands(HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.Indexes.sql"), false));
+            //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
+            //customCommands.AddRange(ParseCommands(HostingEnvironment.MapPath("~/App_Data/Install/SqlServer.StoredProcedures.sql"), false));
+
+            var initializer = new CreateTablesIfNotExist<FrameDbContext>(tablesToValidate, customCommands.ToArray());
+            Database.SetInitializer(initializer);
         }
 
         public void InitDatabase()
@@ -59,7 +70,7 @@ namespace Framework.Data.Providers
 
         public int SupportedLengthOfBinaryHash()
         {
-            throw new NotImplementedException();
+            return 0;
         }
 
         #endregion

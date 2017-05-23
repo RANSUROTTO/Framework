@@ -26,9 +26,7 @@ namespace Framework.Core.Data.Providers
 
         /// <summary>
         /// 加载数据提供者
-        /// Load data provider
         /// </summary>
-        /// <returns>Data provider</returns>
         public abstract IDataProvider LoadDataProvider();
 
     }

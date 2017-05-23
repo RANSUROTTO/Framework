@@ -170,7 +170,6 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         {
             if (scope == null)
             {
-                //no scope specified
                 scope = Scope();
             }
             return scope.ResolveOptional(serviceType);
