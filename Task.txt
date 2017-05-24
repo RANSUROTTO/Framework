@@ -3,6 +3,7 @@
 3.数据库操作(目前仅有EntityFramework=>SqlServer,Mysql)  √
 4.Cache (目前差Redis未处理)
 5.目前正在处理Area
+6.自定义异常
 
 
 
