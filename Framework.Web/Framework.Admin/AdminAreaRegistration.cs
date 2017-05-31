@@ -1,28 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Framework.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {
+
         public override string AreaName
         {
-            get { return "Admin"; }
+            get
+            {
+                return "Admin";
+            }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+
             context.MapRoute(
-                name: "Admin_default",
-                url: "Admin/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", area = "Admin", id = UrlParameter.Optional },
-                namespaces: new[] { "Framework.Admin.Controllers" }
+                "Admin_default",
+                "Admin/{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", area = "Admin", id = UrlParameter.Optional },
+                new[] { "Framework.Admin.Controllers" }
             );
-
+            //context.Routes.Add("DomainRouteForMutiWebSite",
+            //    new DomainRoute(
+            //    "{area}.{domain}",                             // {area}作为二级域名
+            //    "{controller}/{action}/{id}",                  // URL with parameters
+            //    new
+            //    {
+            //        area = "Admin",
+            //        controller = "Home",
+            //        action = "Index",
+            //        id = UrlParameter.Optional,
+            //        Namespaces = new string[] { "Framework.Admin.Controllers" }
+            //    }  // Parameter defaults
+            //));
         }
-
     }
 }
