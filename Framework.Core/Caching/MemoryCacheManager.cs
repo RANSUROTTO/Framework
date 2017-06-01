@@ -4,33 +4,40 @@ using System.Runtime.Caching;
 namespace Framework.Core.Caching
 {
     /// <summary>
-    /// MemoryCache缓存管理实现类
+    /// Represents a manager for caching between HTTP requests (long term caching)
     /// </summary>
     public partial class MemoryCacheManager : ICacheManager
     {
 
         /// <summary>
-        /// 获取MemoryCache缓存对象
+        /// Cache object
         /// </summary>
-        protected ObjectCache Cache => MemoryCache.Default;
+        protected ObjectCache Cache
+        {
+            get
+            {
+                return MemoryCache.Default;
+            }
+        }
+
 
         /// <summary>
-        /// 获取或设置指定键值相关联的值。
+        /// Gets or sets the value associated with the specified key.
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="key">键值</param>
-        /// <returns>与指定键相关联的值。</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="key">The key of the value to get.</param>
+        /// <returns>The value associated with the specified key.</returns>
         public T Get<T>(string key)
         {
             return (T)Cache[key];
         }
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Adds the specified key and object to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">缓存时间/min</param>
+        /// <param name="key">key</param>
+        /// <param name="data">Data</param>
+        /// <param name="cacheTime">Cache time</param>
         public void Set(string key, object data, int cacheTime)
         {
             if (data == null)
@@ -41,11 +48,11 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Adds the specified key and object to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">指定过期时间</param>
+        /// <param name="key">key</param>
+        /// <param name="data">Data</param>
+        /// <param name="cacheTime">Specify expiration time</param>
         public void Set(string key, object data, DateTime cacheTime)
         {
             if (data == null)
@@ -56,26 +63,25 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 获取一个值，指与该键是否有关联的值。
+        /// Gets a value indicating whether the value associated with the specified key is cached
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <returns>结果</returns>
+        /// <param name="key">key</param>
+        /// <returns>Result</returns>
         public bool Any(string key)
         {
             return (Cache.Contains(key));
         }
 
         /// <summary>
-        /// 从缓存中删除指定键和值
+        /// Removes the value with the specified key from the cache
         /// </summary>
-        /// <param name="key">键</param>
+        /// <param name="key">/key</param>
         public void Remove(string key)
         {
             Cache.Remove(key);
         }
 
         /// <summary>
-        /// 清空所有缓存
         /// Clear all cache data
         /// </summary>
         public void Clear()

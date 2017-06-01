@@ -5,17 +5,15 @@ using System.Collections;
 namespace Framework.Core.Caching
 {
     /// <summary>
-    /// HTTP请求期间的缓存管理
+    /// Represents a manager for caching during an HTTP request (short term caching)
     /// </summary>
     public partial class PerRequestCacheManager : ICacheManager
     {
 
         private readonly HttpContextBase _context;
 
-        #region Ctor
-
         /// <summary>
-        /// 构造函数
+        /// Ctor
         /// </summary>
         /// <param name="context">Context</param>
         public PerRequestCacheManager(HttpContextBase context)
@@ -23,10 +21,8 @@ namespace Framework.Core.Caching
             this._context = context;
         }
 
-        #endregion
-
         /// <summary>
-        /// 创建NopRequestCache类的新实例
+        /// Creates a new instance of the RequestCache class
         /// </summary>
         /// <returns></returns>
         protected virtual IDictionary GetItems()
@@ -35,11 +31,11 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 获取或设置指定键值相关联的值。
+        /// Gets or sets the value associated with the specified key.
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="key">键值</param>
-        /// <returns>与指定键相关联的值。</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="key">The key of the value to get.</param>
+        /// <returns>The value associated with the specified key.</returns>
         public virtual T Get<T>(string key)
         {
             var items = GetItems();
@@ -50,11 +46,11 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Adds the specified key and object to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">缓存时间/min</param>
+        /// <param name="key">key</param>
+        /// <param name="data">Data</param>
+        /// <param name="cacheTime">Cache time</param>
         public void Set(string key, object data, int cacheTime = -1)
         {
             var items = GetItems();
@@ -71,21 +67,21 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Adds the specified key and object to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">指定过期时间</param>
+        /// <param name="key">key</param>
+        /// <param name="data">Data</param>
+        /// <param name="cacheTime">Specify expiration time</param>
         public void Set(string key, object data, DateTime cacheTime)
         {
             this.Set(key, data);
         }
 
         /// <summary>
-        /// 获取一个值，指与该键是否有关联的值。
+        /// Gets a value indicating whether the value associated with the specified key is cached
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <returns>结果</returns>
+        /// <param name="key">key</param>
+        /// <returns>Result</returns>
         public bool Any(string key)
         {
             var items = GetItems();
@@ -96,9 +92,9 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 从缓存中删除指定键和值
+        /// Removes the value with the specified key from the cache
         /// </summary>
-        /// <param name="key">键</param>
+        /// <param name="key">/key</param>
         public void Remove(string key)
         {
             var items = GetItems();
@@ -107,7 +103,7 @@ namespace Framework.Core.Caching
         }
 
         /// <summary>
-        /// 清空所有缓存
+        /// Clear all cache data
         /// </summary>
         public void Clear()
         {

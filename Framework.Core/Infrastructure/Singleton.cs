@@ -3,11 +3,9 @@ using System.Collections.Generic;
 
 namespace Framework.Core.Infrastructure
 {
-    /// <summary>  
-    /// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.  
-    /// 单例存储类 可以从该类中AllSingletons内 获取 某类的单例
-    /// Singleton中包含一个键为类型，值为该类型的实例的一个Dictionary  
-    /// </summary> 
+    /// <summary>
+    /// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.
+    /// </summary>
     public class Singleton
     {
         static Singleton()

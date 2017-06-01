@@ -5,8 +5,7 @@ using System.Reflection;
 namespace Framework.Core.Infrastructure.TypeFinder
 {
     /// <summary>
-    /// 类型查找器接口
-    /// Classes implementing this interface provide information about types
+    /// Classes implementing this interface provide information about types 
     /// to various services in the Nop engine.
     /// </summary>
     public interface ITypeFinder

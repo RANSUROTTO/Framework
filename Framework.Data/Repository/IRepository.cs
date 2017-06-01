@@ -8,91 +8,91 @@ using Framework.Data.Domain;
 namespace Framework.Data.Repository
 {
     /// <summary>
-    /// 操作表封装
+    /// Repository
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : BaseEntity, new()
     {
 
         /// <summary>
-        /// 通过主键标识获得实体
+        /// Get entity by identifier
         /// </summary>
         T GetById(object id);
 
         /// <summary>
-        /// 通过主键标识获得实体(异步)
+        /// Get entity by identifier async
         /// </summary>
         Task<T> GetByIdAsync(object id);
 
         /// <summary>
-        /// 插入实体
+        /// Insert entity
         /// </summary>
         /// <param name="entity">Entity</param>
         int Insert(T entity);
 
         /// <summary>
-        /// 插入实体(异步)
+        /// Insert entity async
         /// </summary>
         Task<int> InsertAsync(T entity);
 
         /// <summary>
-        /// 插入多个实体
+        /// Insert entities
         /// </summary>
         int Insert(IEnumerable<T> entities);
 
         /// <summary>
-        /// 插入多个实体(异步)
+        /// Insert entities async
         /// </summary>
         Task<int> InsertAsync(IEnumerable<T> entities);
 
         /// <summary>
-        /// 更新实体
+        /// Update entity
         /// </summary>
         int Update(T entity);
 
         /// <summary>
-        /// 更新实体
+        /// Update entity async
         /// </summary>
         Task<int> UpdateAsync(T entity);
 
         /// <summary>
-        /// 更新多个实体
+        /// update entities
         /// </summary>
         int Update(IEnumerable<T> entities);
 
         /// <summary>
-        /// 更新实体的指定属性
+        /// Update the specified attribute of the entity
         /// </summary>
         int Update(T entity, params Expression<Func<T, object>>[] fields);
 
         /// <summary>
-        /// 更新实体的指定属性
+        /// Update the specified attribute of the entity async
         /// </summary>
         Task<int> UpdateAsync(T entity, params Expression<Func<T, object>>[] fields);
 
         /// <summary>
-        /// 删除实体
+        /// delete entity
         /// </summary>
         void Delete(T entity);
 
         /// <summary>
-        /// 删除实体
+        /// delete entity async
         /// </summary>
         Task DeleteAsync(T entity);
 
         /// <summary>
-        /// 删除多个实体
+        /// delete entities
         /// </summary>
         /// <param name="entities">实体集合</param>
         void Delete(IEnumerable<T> entities);
 
         /// <summary>
-        /// 表 Table
+        /// Gets a table
         /// </summary>
         IQueryable<T> Table { get; }
 
         /// <summary>
-        /// 不跟踪变更的表
+        /// Gets a table with "no tracking" enabled (EF feature) Use it only when you load record(s) only for read-only operations
         /// </summary>
         IQueryable<T> TableNoTracking { get; }
 

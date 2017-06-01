@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -7,7 +6,7 @@ using System.Xml.Linq;
 namespace Framework.Core.Data
 {
     /// <summary>
-    /// 数据设置管理
+    /// Manager of data settings (connection string)
     /// </summary>
     public class DataSettingsManager
     {
@@ -15,15 +14,15 @@ namespace Framework.Core.Data
         protected const char Separator = ':';
 
         /// <summary>
-        /// 数据库配置文件名
+        /// Database configuration file name
         /// </summary>
         protected const string FileName = "db.Config";
 
         /// <summary>
-        /// 转换配置信息
+        /// Parse settings
         /// </summary>
-        /// <param name="text">配置信息字符串</param>
-        /// <returns>DataSettings实例</returns>
+        /// <param name="text">Text of settings file</param>
+        /// <returns>Parsed data settings</returns>
         protected virtual DataSettings ParseSettings(string text)
         {
             var shellSettings = new DataSettings();
@@ -56,7 +55,7 @@ namespace Framework.Core.Data
         }
 
         /// <summary>
-        /// 将数据设置转换为配置文件内容字符串
+        /// Convert data settings to string representation
         /// </summary>
         /// <param name="settings">Settings</param>
         /// <returns>Text</returns>
@@ -88,10 +87,10 @@ namespace Framework.Core.Data
         }
 
         /// <summary>
-        /// 加载配置文件
+        /// Load settings
         /// </summary>
         /// <param name="filePath">
-        /// 数据配置文件物理路径,不传入此参数将使用默认数据库配置文件字符串
+        /// File path; pass null to use default settings file path
         /// </param>
         /// <returns></returns>
         public virtual DataSettings LoadSettings(string filePath = null)
@@ -111,7 +110,7 @@ namespace Framework.Core.Data
         }
 
         /// <summary>
-        /// 保存配置
+        /// Save settings to a file
         /// </summary>
         /// <param name="settings"></param>
         public virtual void SaveSettings(DataSettings settings)
@@ -134,6 +133,5 @@ namespace Framework.Core.Data
         }
 
     }
-
 }
 

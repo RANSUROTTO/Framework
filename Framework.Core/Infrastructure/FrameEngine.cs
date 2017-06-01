@@ -25,7 +25,7 @@ namespace Framework.Core.Infrastructure
         #region Properties
 
         /// <summary>
-        /// 集装箱管理
+        /// Container manager
         /// </summary>
         public ContainerManager ContainerManager
         {
@@ -36,15 +36,19 @@ namespace Framework.Core.Infrastructure
 
         #region Methods
 
+        /// <summary>
+        /// Initialize components and plugins in the nop environment.
+        /// </summary>
+        /// <param name="config">Config</param>
         public void Initialize(WebConfig config)
         {
-            //注册依赖
+            //register dependencies
             RegisterDependencies(config);
 
             //模型寄存器映射器配置 => 不使用Mapper进行codeFirst可以删除
             /*RegisterMapperConfiguration(config);*/
 
-            //运行启动任务
+            //startup tasks
             if (!config.IgnoreStartupTasks)
             {
                 RunStartupTasks();
@@ -52,7 +56,7 @@ namespace Framework.Core.Infrastructure
         }
 
         /// <summary>
-        /// 注册依赖
+        /// Resolve dependency
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns></returns>
@@ -62,7 +66,7 @@ namespace Framework.Core.Infrastructure
         }
 
         /// <summary>
-        /// 注册依赖
+        /// Resolve dependency
         /// </summary>
         /// <param name="type">Type</param>
         /// <returns></returns>
@@ -72,7 +76,7 @@ namespace Framework.Core.Infrastructure
         }
 
         /// <summary>
-        /// 注册依赖
+        /// Resolve dependencies
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
         /// <returns></returns>
@@ -86,7 +90,7 @@ namespace Framework.Core.Infrastructure
         #region Utilities
 
         /// <summary>
-        /// 运行启动任务
+        /// Run startup tasks
         /// </summary>
         protected virtual void RunStartupTasks()
         {
@@ -106,7 +110,7 @@ namespace Framework.Core.Infrastructure
         }
 
         /// <summary>
-        /// 初始注册依赖项
+        /// Register dependencies
         /// </summary>
         /// <param name="config">Config</param>
         protected virtual void RegisterDependencies(WebConfig config)

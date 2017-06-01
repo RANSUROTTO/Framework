@@ -24,17 +24,17 @@ namespace Framework.Data.Context
         #region Utilities
 
         /// <summary>
-        /// 将实体附加到上下文或返回已附加的实体（如果已经附加）
+        /// Attach an entity to the context or return an already attached entity (if it was already attached)
         /// </summary>
-        /// <typeparam name="TEntity">派生自BaseEntity的实体模型</typeparam>
-        /// <param name="entity">实体对象</param>
-        /// <returns>附加到上下文后的实体对象</returns>
+        /// <typeparam name="TEntity">TEntity</typeparam>
+        /// <param name="entity">Entity</param>
+        /// <returns>Attached entity</returns>
         protected virtual TEntity AttachEntityToContext<TEntity>(TEntity entity) where TEntity : BaseEntity, new()
         {
             var alreadyAttached = Set<TEntity>().Local.FirstOrDefault(x => x.Id == entity.Id);
             if (alreadyAttached == null)
             {
-                //附加新实体
+                //attach new entity
                 Set<TEntity>().Attach(entity);
                 return entity;
             }
@@ -54,7 +54,7 @@ namespace Framework.Data.Context
         }
 
         /// <summary>
-        /// 分离实体
+        /// Detach on entity
         /// </summary>
         public void Detach(object entity)
         {
@@ -64,19 +64,29 @@ namespace Framework.Data.Context
             ((IObjectContextAdapter)this).ObjectContext.Detach(entity);
         }
 
+        /// <summary>
+        /// Set Entity Status
+        /// </summary>
         public void SetStatus<T>(T t, EntityState status) where T : BaseEntity
         {
             Entry(t).State = status;
         }
 
+        /// <summary>
+        /// Get Entry
+        /// </summary>
         DbEntityEntry IDbContext.Entry<T>(T t)
         {
             return Entry(t);
         }
 
         /// <summary>
-        /// 执行存储过程并返回查询列表
+        /// Execute stores procedure and load a list of entities at the end
         /// </summary>
+        /// <typeparam name="TEntity">Entity type</typeparam>
+        /// <param name="commandText">Command text</param>
+        /// <param name="parameters">Parameters</param>
+        /// <returns>Entities</returns>
         public IList<TEntity> ExecuteStoredProcedureList<TEntity>(string commandText, params object[] parameters)
             where TEntity : BaseEntity, new()
         {
@@ -104,23 +114,32 @@ namespace Framework.Data.Context
         }
 
         /// <summary>
-        /// 执行纯sql查询
+        /// Creates a raw SQL query that will return elements of the given generic type.  The type can be any type that has properties that match the names of the columns returned from the query, or can be a simple primitive type. The type does not have to be an entity type. The results of this query are never tracked by the context even if the type of object returned is an entity type.
         /// </summary>
+        /// <typeparam name="TElement">The type of object returned by the query.</typeparam>
+        /// <param name="sql">The SQL query string.</param>
+        /// <param name="parameters">The parameters to apply to the SQL query string.</param>
+        /// <returns>Result</returns>
         public IEnumerable<TElement> SqlQuery<TElement>(string sql, params object[] parameters)
         {
             return this.Database.SqlQuery<TElement>(sql, parameters);
         }
 
         /// <summary>
-        /// 对数据库执行给定的DDL / DML命令。
+        /// Executes the given DDL/DML command against the database.
         /// </summary>
+        /// <param name="sql">The command string</param>
+        /// <param name="doNotEnsureTransaction">false - the transaction creation is not ensured; true - the transaction creation is ensured.</param>
+        /// <param name="timeout">Timeout value, in seconds. A null value indicates that the default value of the underlying provider will be used</param>
+        /// <param name="parameters">The parameters to apply to the command string.</param>
+        /// <returns>The result returned by the database after executing the command.</returns>
         public int ExecuteSqlCommand(string sql, bool doNotEnsureTransaction = false, int? timeout = null,
             params object[] parameters)
         {
             int? previousTimeout = null;
             if (timeout.HasValue)
             {
-                //存储上一个超时
+                //store previous timeout
                 previousTimeout = ((IObjectContextAdapter)this).ObjectContext.CommandTimeout;
                 //设置超时时间
                 ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = timeout;
@@ -133,7 +152,7 @@ namespace Framework.Data.Context
 
             if (timeout.HasValue)
             {
-                //设置以前的超时
+                //Set previous timeout back
                 ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = previousTimeout;
             }
 

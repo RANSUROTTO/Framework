@@ -23,7 +23,7 @@ namespace Framework.Data.Repository
         #region Properties
 
         /// <summary>
-        /// 表
+        /// Table
         /// </summary>
         public virtual IQueryable<T> Table
         {
@@ -47,7 +47,7 @@ namespace Framework.Data.Repository
         }
 
         /// <summary>
-        /// 不跟踪变更的表
+        /// Gets a table with "no tracking" enabled (EF feature) Use it only when you load record(s) only for read-only operations
         /// </summary>
         public virtual IQueryable<T> TableNoTracking
         {
@@ -62,9 +62,9 @@ namespace Framework.Data.Repository
         #region Ctor
 
         /// <summary>
-        /// 构造函数
+        /// Ctor
         /// </summary>
-        /// <param name="context">数据库上下文</param>
+        /// <param name="context">Context</param>
         public EfRepository(IDbContext context)
         {
             this._context = context;

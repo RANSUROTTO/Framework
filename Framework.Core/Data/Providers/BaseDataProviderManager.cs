@@ -3,15 +3,15 @@
 namespace Framework.Core.Data.Providers
 {
     /// <summary>
-    /// 数据库提供者管理
+    /// Base data provider manager
     /// </summary>
     public abstract class BaseDataProviderManager
     {
 
         /// <summary>
-        /// 构造函数
+        /// Ctor
         /// </summary>
-        /// <param name="settings">数据设置</param>
+        /// <param name="settings">Data settings</param>
         protected BaseDataProviderManager(DataSettings settings)
         {
             if (settings == null)
@@ -20,12 +20,12 @@ namespace Framework.Core.Data.Providers
         }
 
         /// <summary>
-        /// 获取或设置 数据设置
+        /// Gets or sets settings
         /// </summary>
         protected DataSettings Settings { get; private set; }
 
         /// <summary>
-        /// 加载数据提供者
+        /// Load data provider
         /// </summary>
         public abstract IDataProvider LoadDataProvider();
 

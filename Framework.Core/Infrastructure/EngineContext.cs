@@ -6,15 +6,13 @@ namespace Framework.Core.Infrastructure
 {
 
     /// <summary>
-    /// 提供访问引擎的单例实例。
+    /// Provides access to the singleton instance of the Nop engine.
     /// </summary>
     public class EngineContext
     {
 
-        #region Properties
-
         /// <summary>
-        /// 获取用于访问服务的单例引擎。
+        /// Gets the singleton Nop engine used to access Nop services.
         /// </summary>
         public static IEngine Current
         {
@@ -28,14 +26,12 @@ namespace Framework.Core.Infrastructure
             }
         }
 
-        #endregion
-
         #region Methods
 
         /// <summary>
-        /// 初始化工厂的静态实例。
+        /// Initializes a static instance of the Nop factory.
         /// </summary>
-        /// <param name="forceRecreate">即使工厂以前已初始化，也创建一个新的工厂实例。</param>
+        /// <param name="forceRecreate">Creates a new factory instance even though the factory has been previously initialized.</param>
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static IEngine Initialize(bool forceRecreate = false)
@@ -51,11 +47,12 @@ namespace Framework.Core.Infrastructure
         }
 
         /// <summary>
-        /// 将静态引擎实例设置为提供的引擎。 使用此方法提供您自己的引擎实现。
+        /// Sets the static engine instance to the supplied engine. Use this method to supply your own engine implementation.
         /// </summary>
         /// <param name="engine">
         /// The engine to use.
         /// </param>
+        /// <remarks>Only use this method if you know what you're doing.</remarks>
         public static void Replace(IEngine engine)
         {
             Singleton<IEngine>.Instance = engine;

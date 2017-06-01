@@ -14,12 +14,12 @@ namespace Framework.Core.Infrastructure.DependencyManagement
     {
 
         /// <summary>
-        /// 容器对象
+        /// Gets a container
         /// </summary>
         public virtual IContainer Container { get; }
 
         /// <summary>
-        /// 构造函数
+        /// Ctor
         /// </summary>
         /// <param name="container">Conainer</param>
         public ContainerManager(IContainer container)
@@ -28,12 +28,12 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 分解
+        /// Resolve
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="key">键</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="key">key</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved service</returns>
         public virtual T Resolve<T>(string key = "", ILifetimeScope scope = null) where T : class
         {
             if (scope == null)
@@ -48,11 +48,11 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 分解
+        /// Resolve
         /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <param name="type">Type</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved service</returns>
         public virtual object Resolve(Type type, ILifetimeScope scope = null)
         {
             if (scope == null)
@@ -63,12 +63,12 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 分解多个
+        /// Resolve all
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="key">键</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="key">key</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved services</returns>
         public virtual T[] ResolveAll<T>(string key = "", ILifetimeScope scope = null)
         {
             if (scope == null)
@@ -84,22 +84,22 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 分解已注册服务
+        /// Resolve unregistered service
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved service</returns>
         public virtual T ResolveUnregistered<T>(ILifetimeScope scope = null) where T : class
         {
             return ResolveUnregistered(typeof(T), scope) as T;
         }
 
         /// <summary>
-        /// 分解已注册服务
+        /// Resolve unregistered service
         /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <param name="type">Type</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved service</returns>
         public virtual object ResolveUnregistered(Type type, ILifetimeScope scope = null)
         {
             if (scope == null)
@@ -131,12 +131,12 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 尝试分解
+        /// Try to resolve srevice
         /// </summary>
-        /// <param name="serviceType">类型</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <param name="instance">分解服务</param>
-        /// <returns>分解是否成功</returns>
+        /// <param name="serviceType">Type</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <param name="instance">Resolved service</param>
+        /// <returns>Value indicating whether service has been successfully resolved</returns>
         public virtual bool TryResolve(Type serviceType, ILifetimeScope scope, out object instance)
         {
             if (scope == null)
@@ -147,10 +147,10 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 检查指定服务是否已注册 (允许分离)
+        /// Check whether some service is registered (can be resolved)
         /// </summary>
-        /// <param name="serviceType">类型</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
+        /// <param name="serviceType">Type</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
         public virtual bool IsRegistered(Type serviceType, ILifetimeScope scope = null)
         {
             if (scope == null)
@@ -160,12 +160,13 @@ namespace Framework.Core.Infrastructure.DependencyManagement
             return scope.IsRegistered(serviceType);
         }
 
+
         /// <summary>
-        /// 可选择分解
+        /// Resolve optional
         /// </summary>
-        /// <param name="serviceType">类型</param>
-        /// <param name="scope">范围；通过null来自动解析当前的范围</param>
-        /// <returns>分解服务</returns>
+        /// <param name="serviceType">Type</param>
+        /// <param name="scope">Scope; pass null to automatically resolve the current scope</param>
+        /// <returns>Resolved service</returns>
         public virtual object ResolveOptional(Type serviceType, ILifetimeScope scope = null)
         {
             if (scope == null)
@@ -176,8 +177,9 @@ namespace Framework.Core.Infrastructure.DependencyManagement
         }
 
         /// <summary>
-        /// 获取当前的生命周期范围
+        /// Get current scope
         /// </summary>
+        /// <returns>Scope</returns>
         public virtual ILifetimeScope Scope()
         {
             try
@@ -185,6 +187,7 @@ namespace Framework.Core.Infrastructure.DependencyManagement
                 if (HttpContext.Current != null)
                     return AutofacDependencyResolver.Current.RequestLifetimeScope;
 
+                //when such lifetime scope is returned, you should be sure that it'll be disposed once used (e.g. in schedule tasks)
                 return Container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
             }
             catch (Exception)

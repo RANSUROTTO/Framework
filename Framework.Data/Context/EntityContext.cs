@@ -11,6 +11,7 @@ namespace Framework.Data.Context
     {
         public EntityContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
+            //Open Lazy Loading 
             this.Configuration.LazyLoadingEnabled = true;
         }
 
@@ -22,7 +23,7 @@ namespace Framework.Data.Context
         }
 
         /// <summary>
-        /// 创建表的脚本
+        /// Generates scripts to create tables
         /// </summary>
         /// <returns></returns>
         public override string CreateDatabaseScript()

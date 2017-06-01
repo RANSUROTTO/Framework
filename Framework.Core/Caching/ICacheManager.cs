@@ -3,50 +3,50 @@
 namespace Framework.Core.Caching
 {
     /// <summary>
-    /// 缓存管理接口
+    /// Cache manager interface
     /// </summary>
     public interface ICacheManager : IDisposable
     {
 
         /// <summary>
-        /// 获取或设置指定键值相关联的值。
+        /// Gets or sets the value associated with the specified key.
         /// </summary>
-        /// <typeparam name="T">类型</typeparam>
-        /// <param name="key">键值</param>
-        /// <returns>与指定键相关联的值。</returns>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="key">The key of the value to get.</param>
+        /// <returns>The value associated with the specified key.</returns>
         T Get<T>(string key);
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Adds the specified key and object to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">缓存时间/min</param>
+        /// <param name="key">key</param>
+        /// <param name="data">Data</param>
+        /// <param name="cacheTime">Cache time</param>
         void Set(string key, object data, int cacheTime);
 
         /// <summary>
-        /// 将指定的键和值添加到缓存。
+        /// Add the specified keys and values to the cache.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <param name="data">数据值</param>
-        /// <param name="cacheTime">指定过期时间</param>
+        /// <param name="key">key</param>
+        /// <param name="data">value</param>
+        /// <param name="cacheTime">Specify expiration time</param>
         void Set(string key, object data, DateTime cacheTime);
 
         /// <summary>
-        /// 获取一个值，指与该键是否有关联的值。
+        /// Gets a value that indicates whether the key is associated with the key.
         /// </summary>
-        /// <param name="key">键值</param>
-        /// <returns>结果</returns>
+        /// <param name="key">key</param>
+        /// <returns>result</returns>
         bool Any(string key);
 
         /// <summary>
-        /// 从缓存中删除指定键和值
+        /// Remove the specified key and value from the cache
         /// </summary>
-        /// <param name="key">键</param>
+        /// <param name="key">key</param>
         void Remove(string key);
 
         /// <summary>
-        /// 清空所有缓存
+        /// Clear all cache
         /// </summary>
         void Clear();
 

@@ -3,46 +3,47 @@
 namespace Framework.Core.Data.Providers
 {
     /// <summary>
-    /// 数据提供接口
+    /// Data provider interface
     /// </summary>
     public interface IDataProvider
     {
 
         /// <summary>
-        /// 初始化连接工厂
+        /// Initialize connection factory
         /// </summary>
         void InitConnectionFactory();
 
         /// <summary>
-        /// 设置数据库初始化程序
+        /// Set database initializer
         /// </summary>
         void SetDatabaseInitializer();
 
         /// <summary>
-        /// 初始化数据库
+        /// Initialize database
         /// </summary>
         void InitDatabase();
 
         /// <summary>
-        /// 指示该数据提供者是否支持存储过程的值
+        /// A value indicating whether this data provider supports stored procedures
         /// </summary>
         bool StoredProceduredSupported { get; }
 
         /// <summary>
-        /// 一个值，表示该数据提供者是否支持备份
+        /// A value indicating whether this data provider supports backup
         /// </summary>
         bool BackupSupported { get; }
 
         /// <summary>
-        /// 获取支持数据库参数对象（由存储过程使用）
+        /// Gets a support database parameter object (used by stored procedures)
         /// </summary>
         /// <returns></returns>
         DbParameter GetParameter();
 
         /// <summary>
-        /// HASHBYTES功能的最大数据长度如果不支持HASHBYTES函数，则返回0
+        /// Maximum length of the data for HASHBYTES functions
+        /// returns 0 if HASHBYTES function is not supported
         /// </summary>
-        /// <returns>HASHBYTES功能的数据长度</returns>
+        /// <returns>Length of the data for HASHBYTES functions</returns>
         int SupportedLengthOfBinaryHash();
 
     }

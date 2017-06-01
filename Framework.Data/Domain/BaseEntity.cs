@@ -3,27 +3,27 @@
 namespace Framework.Data.Domain
 {
     /// <summary>
-    /// 实体基础类
+    /// Base Entity
     /// </summary>
     public abstract class BaseEntity
     {
         /// <summary>
-        /// 主键标识
+        /// Identity
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// 删除标识
+        /// Delete the Tag
         /// </summary>
         public bool IsDelete { set; get; }
 
         /// <summary>
-        /// 数据创建时间
+        /// Data creation time
         /// </summary>
         public virtual DateTime CreateAt { set; get; }
 
         /// <summary>
-        /// 时间戳 并发标识
+        /// Timestamp, concurrent identification.
         /// </summary>
         public byte[] RowVersion { set; get; }
 

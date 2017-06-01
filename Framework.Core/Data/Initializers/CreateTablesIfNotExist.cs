@@ -13,10 +13,10 @@ namespace Framework.Core.Data.Initializers
         private readonly string[] _customCommands;
 
         /// <summary>
-        /// 构造函数
+        /// Ctor
         /// </summary>
-        /// <param name="tablesToValidate">判断指定表名是否存在，Null为不验证</param>
-        /// <param name="customCommands">执行命令集</param>
+        /// <param name="tablesToValidate">A list of existing table names to validate; null to don't validate table names</param>
+        /// <param name="customCommands">A list of custom commands to execute</param>
         public CreateTablesIfNotExist(string[] tablesToValidate, string[] customCommands)
         {
             this._tablesToValidate = tablesToValidate;
@@ -35,13 +35,13 @@ namespace Framework.Core.Data.Initializers
                 bool createTables;
                 if (_tablesToValidate != null && _tablesToValidate.Length > 0)
                 {
-                    //我们有一些表名来验证
+                    //we have some table names to validate
                     var existingTableNames = new List<string>(context.Database.SqlQuery<string>("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'"));
                     createTables = !existingTableNames.Intersect(_tablesToValidate, StringComparer.InvariantCultureIgnoreCase).Any();
                 }
                 else
                 {
-                    //检查表是否已经创建
+                    //check whether tables are already created
                     int numberOfTables = 0;
                     foreach (var t1 in context.Database.SqlQuery<int>("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' "))
                         numberOfTables = t1;
@@ -51,7 +51,7 @@ namespace Framework.Core.Data.Initializers
 
                 if (createTables)
                 {
-                    //创建所有表
+                    //create all tables
                     var dbCreationScript = ((IObjectContextAdapter)context).ObjectContext.CreateDatabaseScript();
                     context.Database.ExecuteSqlCommand(dbCreationScript);
 
